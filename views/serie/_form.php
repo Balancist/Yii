@@ -16,11 +16,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'kind')->dropDownList([ 'لایواکشن' => 'لایواکشن', 'انیمیشن' => 'انیمیشن', 'انیمه' => 'انیمه', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'kind')->dropDownList([ 'Live Action' => 'لایواکشن', 'انیمیشن' => 'انیمیشن', 'انیمه' => 'انیمه', ], ['prompt' => '']) ?>
 
     <?= $form->field($model, 'season')->textInput() ?>
 
-    <?= $form->field($model, 'status')->dropDownList([ 'در حال پخش' => 'در حال پخش', 'در حال ساخت' => 'در حال ساخت', 'پایان یافته' => 'پایان یافته', 'نامعلوم' => 'نامعلوم', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'status')->dropDownList([ 1 => 'در حال پخش', 'در حال ساخت' => 'در حال ساخت', 'پایان یافته' => 'پایان یافته', 'نامعلوم' => 'نامعلوم', ], ['prompt' => '']) ?>
 
     <?= $form->field($model, 'poster')->textInput(['maxlength' => true]) ?>
 

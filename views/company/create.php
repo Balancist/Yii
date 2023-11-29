@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
@@ -15,6 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'all' => $all
     ]) ?>
 
 </div>

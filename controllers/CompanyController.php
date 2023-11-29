@@ -80,6 +80,11 @@ class CompanyController extends Controller
     public function actionCreate()
     {
         $model = new Company();
+        $all = Company::find()->all();
+        $all_companies = [];
+        foreach ($all as $company) {
+            $all_companies[$company->id] = $company->name;
+        }
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -91,6 +96,7 @@ class CompanyController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'all' => $all_companies,
         ]);
     }
 

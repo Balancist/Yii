@@ -8,6 +8,10 @@ use yii\web\IdentityInterface;
 
 class User extends ActiveRecord implements IdentityInterface
 {
+    public $group = [
+        'admin' => 1
+    ];
+
     public static function tableName()
     {
         return 'user';
