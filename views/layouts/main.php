@@ -47,9 +47,9 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             ['label' => 'Stream', 'url' => ['/stream']],
             ['label' => 'Episode', 'url' => ['/episode']],
             Yii::$app->user->isGuest
-                ? ['label' => 'Login', 'url' => ['/site/login']]
+                ? ['label' => 'Login', 'url' => ['/v1/auth/auth/login']]
                 : '<li class="nav-item">'
-                    . Html::beginForm(['/site/logout'])
+                    . Html::beginForm(['/v1/auth/auth/logout'])
                     . Html::submitButton(
                         'Logout (' . Yii::$app->user->identity->username . ')',
                         ['class' => 'nav-link btn btn-link logout']
@@ -58,7 +58,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     . '</li>'
             ,
             Yii::$app->user->isGuest
-                ? ['label' => 'Signup', 'url' => ['/site/signup']]
+                ? ['label' => 'Signup', 'url' => ['/v1/auth/auth/signup']]
                 : ''
         ]
     ]);
