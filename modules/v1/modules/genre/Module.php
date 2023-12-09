@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\v1\modules\company;
+namespace app\modules\v1\modules\genre;
 
 class Module extends \yii\base\Module
 {

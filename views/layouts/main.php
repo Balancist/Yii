@@ -39,13 +39,13 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Film', 'url' => ['/film']],
-            ['label' => 'Collection', 'url' => ['/collection']],
-            ['label' => 'Serie', 'url' => ['/serie']],
-            ['label' => 'Genre', 'url' => ['/genre']],
-            ['label' => 'Company', 'url' => ['/company']],
-            ['label' => 'Stream', 'url' => ['/stream']],
-            ['label' => 'Episode', 'url' => ['/episode']],
+            ['label' => 'Film', 'url' => ['/v1/film/film']],
+            ['label' => 'Collection', 'url' => ['/v1/collection/collection']],
+            ['label' => 'Serie', 'url' => ['/v1/serie/serie']],
+            ['label' => 'Genre', 'url' => ['/v1/genre/genre']],
+            ['label' => 'Company', 'url' => ['/v1/company/company']],
+            ['label' => 'Stream', 'url' => ['/v1/stream/stream']],
+            ['label' => 'Episode', 'url' => ['/v1/episode/episode']],
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/v1/auth/auth/login']]
                 : '<li class="nav-item">'
