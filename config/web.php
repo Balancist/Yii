@@ -23,6 +23,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'TwGEJS26ueIlrsVC_7KZqIKsyjCji3Jn',
+            'enableCsrfValidation' => false
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
@@ -65,7 +66,7 @@ $config = [
             'translations' => [
                 '*' => [
                     'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@backend/messages', // if advanced application, set @frontend/messages
+                    'basePath' => 'yii/messages', // if advanced application, set @frontend/messages
                     'sourceLanguage' => 'fa',
                 ],
             ],

@@ -20,10 +20,6 @@ use yii\filters\VerbFilter;
  * @SWG\Tag(
  *   name="company",
  *   description="کمپانی",
- *   @SWG\ExternalDocumentation(
- *     description="Find out more about our store",
- *     url="http://swagger.io"
- *   )
  * )
  */
 class CompanyController extends Controller
@@ -45,7 +41,7 @@ class CompanyController extends Controller
                     ]
                 ],
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
                     ],
@@ -133,26 +129,29 @@ class CompanyController extends Controller
      *     description="create post",
      *     produces={"application/json"},
      *     @SWG\Parameter(
-     *         in = "body",
-     *         name = "company",
-     *         @SWG\Schema(
-     *             @SWG\Property(
-     *                 name="name",
-     *                 required="true",
-     *                 type="string"
-     *             ),
-     *             @SWG\Property(
-     *                 name="slug",
-     *                 required="true",
-     *                 type="string"
-     *             ),
-     *             @SWG\Property(
-     *                 name="logo",
-     *                 required="true",
-     *                 type="string"
-     *             )   
-     *         )
-     *     )
+     *         in = "formData",
+     *         name = "Company[name]",
+     *         required = true,
+     *         type = "string"
+     *     ),
+     *     @SWG\Parameter(
+     *         in = "formData",
+     *         name = "Company[slug]",
+     *         required = true,
+     *         type = "string"
+     *     ),
+     *     @SWG\Parameter(
+     *         in = "formData",
+     *         name = "Company[logo]",
+     *         required = true,
+     *         type = "string"
+     *     ),
+     *     @SWG\Parameter(
+     *         in = "formData",
+     *         name = "Company[mother_id]",
+     *         required = true,
+     *         type = "integer"
+     *     ),
      *     @SWG\Response(
      *         response = 200,
      *         description = " success"
@@ -188,7 +187,55 @@ class CompanyController extends Controller
         ]);
     }
 
-
+    /**
+     * @SWG\Patch(
+     *     path="/company/{id}",
+     *     tags={"company"},
+     *     summary="Update",
+     *     description="update patch",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *        in = "path",
+     *        name = "id",
+     *        required = true,
+     *        type = "integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         in = "formData",
+     *         name = "Company[name]",
+     *         required = false,
+     *         type = "string"
+     *     ),
+     *     @SWG\Parameter(
+     *         in = "formData",
+     *         name = "Company[slug]",
+     *         required = false,
+     *         type = "string"
+     *     ),
+     *     @SWG\Parameter(
+     *         in = "formData",
+     *         name = "Company[logo]",
+     *         required = false,
+     *         type = "string"
+     *     ),
+     *     @SWG\Parameter(
+     *         in = "formData",
+     *         name = "Company[mother_id]",
+     *         required = false,
+     *         type = "integer"
+     *     ),
+     *     @SWG\Response(
+     *         response = 200,
+     *         description = " success"
+     *     ),
+     *     @SWG\Response(
+     *         response = 401,
+     *         description = "Error",
+     *         @SWG\Schema(ref="yii\web\Response::$httpStatuses->401")
+     *     )
+     * )
+     *
+     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -198,7 +245,7 @@ class CompanyController extends Controller
             $all_companies[$company->id] = $company->name;
         }
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPatch && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -208,6 +255,31 @@ class CompanyController extends Controller
         ]);
     }
 
+    /**
+     * @SWG\Delete(
+     *     path="/company/{id}",
+     *     tags={"company"},
+     *     summary="Delete",
+     *     description="delete company",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *        in = "path",
+     *        name = "id",
+     *        description = "شناسه",
+     *        required = true,
+     *        type = "integer"
+     *     ),
+     *     @SWG\Response(
+     *         response = 200,
+     *         description = "success"
+     *     ),
+     *     @SWG\Response(
+     *         response = 401,
+     *         description = "error",
+     *         @SWG\Schema(ref="yii\web\Response::$httpStatuses->401")
+     *     )
+     * )
+     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
