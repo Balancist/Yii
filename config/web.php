@@ -17,9 +17,6 @@ $config = [
         ],
         'v1' => [
             'class' => 'app\modules\v1\Module'
-        ],
-        'v2' => [
-            'class' => 'app\modules\v2\Module'
         ]
     ],
     'components' => [
@@ -61,8 +58,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/company']],
-                ['class' => 'yii\rest\UrlRule', 'controller' => ['v2/company']],
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['company' => 'v1/company/company']],
             ],
         ],
         'i18n' => [

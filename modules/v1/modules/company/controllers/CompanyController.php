@@ -13,7 +13,10 @@ use yii\filters\VerbFilter;
  * CompanyController implements the CRUD actions for Company model.
  */
 /**
- *
+ * @SWG\Info(
+ *   version="1.0",
+ *   title="Companies API"
+ * )
  * @SWG\Tag(
  *   name="company",
  *   description="کمپانی",
@@ -25,9 +28,6 @@ use yii\filters\VerbFilter;
  */
 class CompanyController extends Controller
 {
-    /**
-     * @inheritDoc
-     */
     public function behaviors()
     {
         return array_merge(
@@ -59,15 +59,28 @@ class CompanyController extends Controller
         return [
             'doc' => [
                 'class' => 'light\swagger\SwaggerAction',
-                'restUrl' => \yii\helpers\Url::to(['company/create'], true)
+                'restUrl' => \yii\helpers\Url::to(['/company'], true)
             ]
         ];
     }
 
     /**
-     * Lists all Company models.
-     *
-     * @return string
+     * @SWG\Get(
+     *     path="/company",
+     *     tags={"company"},
+     *     summary="Index",
+     *     description="index *query* *formData*  get",
+     *     produces={"application/json"},
+     *     @SWG\Response(
+     *         response = 200,
+     *         description = "success"
+     *     ),
+     *     @SWG\Response(
+     *         response = 401,
+     *         description = "error",
+     *         @SWG\Schema(ref="yii\web\Response::$httpStatuses->401")
+     *     )
+     * )
      */
     public function actionIndex()
     {
@@ -81,36 +94,29 @@ class CompanyController extends Controller
     }
 
     /**
-     * Displays a single Company model.
-     * @param int $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    /**
      * @SWG\Get(
-     *     path="/company/view",
+     *     path="/company/{id}",
      *     tags={"company"},
      *     summary="View",
      *     description="view *query* *formData*  get",
      *     produces={"application/json"},
      *     @SWG\Parameter(
-     *        in = "formData",
+     *        in = "path",
      *        name = "id",
      *        description = "شناسه",
      *        required = true,
-     *        type = "string"
+     *        type = "integer"
      *     ),
      *     @SWG\Response(
      *         response = 200,
-     *         description = " success"
+     *         description = "success"
      *     ),
      *     @SWG\Response(
      *         response = 401,
-     *         description = "Error in Create",
-     *         @SWG\Schema(ref="#/definitions/Error")
+     *         description = "error",
+     *         @SWG\Schema(ref="yii\web\Response::$httpStatuses->401")
      *     )
      * )
-     *
      */
     public function actionView($id)
     {
@@ -120,32 +126,41 @@ class CompanyController extends Controller
     }
 
     /**
-     * Creates a new Company model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
-    /**
      * @SWG\Post(
-     *     path="/company/create",
+     *     path="/company",
      *     tags={"company"},
      *     summary="Create",
-     *     description="create *query* *formData*  post",
+     *     description="create post",
      *     produces={"application/json"},
      *     @SWG\Parameter(
-     *        in = "formData",
-     *        name = "name",
-     *        description = "نام کمپانی",
-     *        required = true,
-     *        type = "string"
-     *     ),
+     *         in = "body",
+     *         name = "company",
+     *         @SWG\Schema(
+     *             @SWG\Property(
+     *                 name="name",
+     *                 required="true",
+     *                 type="string"
+     *             ),
+     *             @SWG\Property(
+     *                 name="slug",
+     *                 required="true",
+     *                 type="string"
+     *             ),
+     *             @SWG\Property(
+     *                 name="logo",
+     *                 required="true",
+     *                 type="string"
+     *             )   
+     *         )
+     *     )
      *     @SWG\Response(
      *         response = 200,
      *         description = " success"
      *     ),
      *     @SWG\Response(
      *         response = 401,
-     *         description = "Error in Create",
-     *         @SWG\Schema(ref="#/definitions/Error")
+     *         description = "Error",
+     *         @SWG\Schema(ref="yii\web\Response::$httpStatuses->401")
      *     )
      * )
      *
@@ -173,13 +188,7 @@ class CompanyController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Company model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -199,13 +208,6 @@ class CompanyController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing Company model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -213,13 +215,6 @@ class CompanyController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Company model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
-     * @return Company the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = Company::findOne(['id' => $id])) !== null) {

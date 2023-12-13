@@ -26,12 +26,13 @@ class SiteController extends Controller
                 'class' => 'light\swagger\SwaggerApiAction',
                 //The scan directories, you should use real path there.
                 'scanDir' => [
-                    Yii::getAlias('@app/swagger'),
+                    Yii::getAlias('@app/modules/swagger'),
                     Yii::getAlias('@app/controllers'),
                     Yii::getAlias('@app/models'),
+                    Yii::getAlias('@app/modules'),
                     Yii::getAlias('@app/views'),
                 ],
-                'api_key' => 'balbalbal',
+                'api_key' => 'test',
                 'cache' => 'cache',
                 'cacheKey' => 'api-swagger-cache',
             ],
