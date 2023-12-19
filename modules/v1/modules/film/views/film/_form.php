@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'year')->textInput() ?>
 
-    <?= $form->field($model, 'kind')->dropDownList([ 'سینمایی' => 'سینمایی', 'انیمیشن' => 'انیمیشن', 'انیمه' => 'انیمه', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'kind')->dropDownList([ '1' => 'سینمایی', '2' => 'انیمیشن', '3' => 'انیمه', ], ['prompt' => '']) ?>
 
     <?= $form->field($model, 'chapter')->textInput() ?>
 

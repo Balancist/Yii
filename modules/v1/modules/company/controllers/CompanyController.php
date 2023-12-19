@@ -149,7 +149,7 @@ class CompanyController extends Controller
      *     @SWG\Parameter(
      *         in = "formData",
      *         name = "Company[mother_id]",
-     *         required = true,
+     *         required = false,
      *         type = "integer"
      *     ),
      *     @SWG\Response(

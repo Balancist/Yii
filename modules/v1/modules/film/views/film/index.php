@@ -6,10 +6,6 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
-/** @var yii\web\View $this */
-/** @var app\models\FilmSearch $searchModel */
-/** @var yii\data\ActiveDataProvider $dataProvider */
-
 $this->title = 'Films';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -18,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= \Yii::$app->user->can('create') ? Html::a('Create Film', ['create'], ['class' => 'btn btn-success']) : '' ?>
+        <?= \Yii::$app->user->can('insertFilm') ? Html::a('Create Film', ['create'], ['class' => 'btn btn-success']) : '' ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -39,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'video',
             'collection_id',
             'price',
-            \Yii::$app->user->can('create') ? [
+            \Yii::$app->user->can('updateFilm') ? [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Film $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);

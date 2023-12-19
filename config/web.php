@@ -26,7 +26,7 @@ $config = [
             'enableCsrfValidation' => false
         ],
         'authManager' => [
-            'class' => 'yii\rbac\DbManager',
+            'class' => 'yii\rbac\DbManager'
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',

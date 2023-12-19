@@ -2,6 +2,7 @@
 
 namespace app\modules\v1\modules\film\controllers;
 
+use Yii;
 use app\modules\v1\modules\film\models\Film;
 use app\modules\v1\modules\film\models\FilmSearch;
 use yii\web\Controller;
@@ -9,9 +10,7 @@ use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-/**
- * FilmController implements the CRUD actions for Film model.
- */
+
 class FilmController extends Controller
 {
     public function behaviors()
@@ -25,8 +24,16 @@ class FilmController extends Controller
                     'rules' => [
                         [
                             'allow' => true,
-                            'actions' => ['create', 'update', 'delete'],
-                            'roles' => ['admin']
+                            'actions' => ['create'],
+                            'roles' => ['admin', 'filmAdmin']
+                        ],
+                        [
+                            'allow' => true, 
+                            'actions' => ['update', 'delete'],
+                            'roles' => ['updateFilm', 'deleteFilm'],
+                            'roleParams' => function() {
+                                return ['object' => Film::findOne(['id' => Yii::$app->request->get('id')])];
+                            },
                         ]
                     ]
                 ],
@@ -40,11 +47,6 @@ class FilmController extends Controller
         );
     }
 
-    /**
-     * Lists all Film models.
-     *
-     * @return string
-     */
     public function actionIndex()
     {
         $searchModel = new FilmSearch();
@@ -56,26 +58,15 @@ class FilmController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Film model.
-     * @param int $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionView($id)
     {
         $model = $this->findModel($id);
 
         return $this->render('view', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
-    /**
-     * Creates a new Film model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
     public function actionCreate()
     {
         $model = new Film();
@@ -93,13 +84,6 @@ class FilmController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Film model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -113,13 +97,6 @@ class FilmController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing Film model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -127,13 +104,6 @@ class FilmController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Film model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
-     * @return Film the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = Film::findOne(['id' => $id])) !== null) {

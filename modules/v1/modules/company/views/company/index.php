@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= \Yii::$app->user->can('create') ? Html::a('Create Company', ['create'], ['class' => 'btn btn-success']) : '' ?>
+        <?= \Yii::$app->user->can('insertCompany') ? Html::a('Create Company', ['create'], ['class' => 'btn btn-success']) : '' ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'slug',
             'logo',
             'mother_id',
-            \Yii::$app->user->can('create') ? [
+            \Yii::$app->user->can('updateCompany') ? [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Company $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
