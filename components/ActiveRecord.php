@@ -1,3 +1,5 @@
 <?php
 
-class ActiveRecord extends yii\db\ActiveRecord {}
+namespace app\components;
+
+class ActiveRecord extends \yii\db\ActiveRecord {}

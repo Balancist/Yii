@@ -5,48 +5,12 @@ namespace app\modules\v1\modules\film\controllers;
 use Yii;
 use app\modules\v1\modules\film\models\Film;
 use app\modules\v1\modules\film\models\FilmSearch;
-use yii\web\Controller;
-use yii\filters\AccessControl;
+use app\components\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 
 class FilmController extends Controller
 {
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'access' => [
-                    'class' => AccessControl::class,
-                    'only' => ['create', 'update', 'delete'],
-                    'rules' => [
-                        [
-                            'allow' => true,
-                            'actions' => ['create'],
-                            'roles' => ['admin', 'filmAdmin']
-                        ],
-                        [
-                            'allow' => true, 
-                            'actions' => ['update', 'delete'],
-                            'roles' => ['updateFilm', 'deleteFilm'],
-                            'roleParams' => function() {
-                                return ['object' => Film::findOne(['id' => Yii::$app->request->get('id')])];
-                            },
-                        ]
-                    ]
-                ],
-                'verbs' => [
-                    'class' => VerbFilter::class,
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
-            ]
-        );
-    }
-
     public function actionIndex()
     {
         $searchModel = new FilmSearch();
@@ -72,6 +36,7 @@ class FilmController extends Controller
         $model = new Film();
 
         if ($this->request->isPost) {
+            $model->publisher = \Yii::$app->user->id;
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }

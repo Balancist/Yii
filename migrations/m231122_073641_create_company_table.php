@@ -12,7 +12,7 @@ class m231122_073641_create_company_table extends Migration
             'slug' => $this->string(50)->notNull(),
             'logo' => $this->string(1000)->notNull(),
             'mother_id' => $this->integer()
-        ]);
+        ], 'ENGINE=InnoDB');
 
         $this->createIndex(
             'idx-company-mother_id',

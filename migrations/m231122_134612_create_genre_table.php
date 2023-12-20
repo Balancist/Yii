@@ -16,7 +16,7 @@ class m231122_134612_create_genre_table extends Migration
             'id' => $this->primaryKey(),
             'title' => $this->string(30)->notNull(),
             'slug' => $this->string(30)->notNull(),
-        ]);
+        ], 'ENGINE=InnoDB');
 
         $this->createIndex(
             'idx-genre-slug',

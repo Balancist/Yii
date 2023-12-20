@@ -17,7 +17,7 @@ class m231122_134554_create_stream_table extends Migration
             'name' => $this->string(50)->notNull(),
             'slug' => $this->string(50)->notNull(),
             'logo' => $this->string(1000)->notNull(),
-        ]);
+        ], 'ENGINE=InnoDB');
 
         $this->createIndex(
             'idx-stream-slug',

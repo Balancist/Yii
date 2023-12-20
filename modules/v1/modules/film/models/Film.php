@@ -10,19 +10,19 @@ use Yii;
  * @property int $id
  * @property string $title
  * @property string $slug
- * @property int $year
- * @property string $kind
- * @property int|null $chapter
  * @property string $poster
  * @property string $video
+ * @property int $year
+ * @property int|null $chapter
  * @property int|null $collection_id
- * @property int $price
+ * @property int|null $price
+ * @property string $kind
+ * @property int $publisher
  *
  * @property Collection $collection
- * @property Company[] $companies
- * @property Genre[] $genres
- * @property SerieCompany[] $serieCompanies
- * @property SerieGenre[] $serieGenres
+ * @property FilmCompany $filmCompany
+ * @property FilmGenre $filmGenre
+ * @property User $publisher0
  */
 class Film extends \yii\db\ActiveRecord
 {
@@ -48,6 +48,7 @@ class Film extends \yii\db\ActiveRecord
             [['slug'], 'string', 'max' => 50],
             [['poster', 'video'], 'string', 'max' => 1000],
             [['collection_id'], 'exist', 'skipOnError' => true, 'targetClass' => Collection::class, 'targetAttribute' => ['collection_id' => 'id']],
+            [['publisher'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['publisher' => 'id']],
         ];
     }
 
@@ -60,13 +61,14 @@ class Film extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'slug' => 'Slug',
-            'year' => 'Year',
-            'kind' => 'Kind',
-            'chapter' => 'Chapter',
             'poster' => 'Poster',
             'video' => 'Video',
+            'year' => 'Year',
+            'chapter' => 'Chapter',
             'collection_id' => 'Collection ID',
             'price' => 'Price',
+            'kind' => 'Kind',
+            'publisher' => 'Publisher',
         ];
     }
 
@@ -81,42 +83,32 @@ class Film extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Companies]].
+     * Gets query for [[FilmCompany]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getCompanies()
+    public function getFilmCompany()
     {
-        return $this->hasMany(Company::class, ['id' => 'company_id'])->viaTable('serie_company', ['film_id' => 'id']);
+        return $this->hasOne(FilmCompany::class, ['film_id' => 'id']);
     }
 
     /**
-     * Gets query for [[Genres]].
+     * Gets query for [[FilmGenre]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getGenres()
+    public function getFilmGenre()
     {
-        return $this->hasMany(Genre::class, ['id' => 'genre_id'])->viaTable('serie_genre', ['film_id' => 'id']);
+        return $this->hasOne(FilmGenre::class, ['film_id' => 'id']);
     }
 
     /**
-     * Gets query for [[SerieCompanies]].
+     * Gets query for [[Publisher0]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getSerieCompanies()
+    public function getPublisher0()
     {
-        return $this->hasMany(SerieCompany::class, ['film_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[SerieGenres]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSerieGenres()
-    {
-        return $this->hasMany(SerieGenre::class, ['film_id' => 'id']);
+        return $this->hasOne(User::class, ['id' => 'publisher']);
     }
 }

@@ -24,7 +24,7 @@ class m231122_134521_create_serie_table extends Migration
             'last' => $this->dateTime()->notNull(),
             'kind' => "ENUM('Animation', 'Anime', 'Live Action') NOT NULL",
             'status' => "ENUM('Finished', 'In Progress', 'In Publication', 'Undefined') NOT NULL"
-        ]);
+        ], 'ENGINE=InnoDB');
 
         $this->createIndex(
             'idx-serie-stream_id',

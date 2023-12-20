@@ -19,7 +19,7 @@ class m231122_134637_create_episode_table extends Migration
             'price' => $this->integer()->defaultValue(0),
             'season' => $this->integer()->notNull(),
             'serie_id' => $this->integer()->notNull()
-        ]);
+        ], 'ENGINE=InnoDB');
 
         $this->createIndex(
             'idx-episode-serie_id',

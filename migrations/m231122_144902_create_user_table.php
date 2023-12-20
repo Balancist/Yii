@@ -17,7 +17,7 @@ class m231122_144902_create_user_table extends Migration
             'username' => $this->string(50)->notNull()->unique(),
             'password' => $this->string(50)->notNull(),
             'phone' => $this->string(11)->notNull()->unique(),
-        ]);
+        ], 'ENGINE=InnoDB');
     }
 
     /**

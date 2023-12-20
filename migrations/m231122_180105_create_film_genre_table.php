@@ -16,7 +16,7 @@ class m231122_180105_create_film_genre_table extends Migration
             'id' => $this->primaryKey(),
             'film_id' => $this->integer()->notNull()->unique(),
             'genre_id' => $this->integer()->notNull()->unique(),
-        ]);
+        ], 'ENGINE=InnoDB');
 
         $this->createIndex(
             'idx-film_genre-film_id',

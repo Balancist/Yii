@@ -31,6 +31,14 @@ class m231122_180147_add_foreign_keys extends Migration
         );
 
         $this->addForeignKey(
+            'fk-film-publisher',
+            'film',
+            'publisher',
+            'user',
+            'id'
+        );
+
+        $this->addForeignKey(
             'fk-film_company-film_id',
             'film_company',
             'film_id',

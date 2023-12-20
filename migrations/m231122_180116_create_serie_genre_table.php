@@ -16,7 +16,7 @@ class m231122_180116_create_serie_genre_table extends Migration
             'id' => $this->primaryKey(),
             'serie_id' => $this->integer()->notNull()->unique(),
             'genre_id' => $this->integer()->notNull()->unique(),
-        ]);
+        ], 'ENGINE=InnoDB');
 
         $this->createIndex(
             'idx-serie_genre-serie_id',

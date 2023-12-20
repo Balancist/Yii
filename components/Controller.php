@@ -4,11 +4,13 @@ namespace app\components;
 
 use app\components\UserGroupBehavior;
 
-class Controller extends yii\web\Controller {
+class Controller extends \yii\web\Controller {
 	
 	public function behaviors() {
-		$behaviors['UserGroupBehaviors'] = [
-			'class'=> UserGroupBehaviors::class
+		return [
+			'UserGroupBehavior' => [
+				'class' => UserGroupBehavior::class,
+			]
 		];
 	}
 }

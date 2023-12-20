@@ -16,7 +16,7 @@ class m231122_180044_create_film_company_table extends Migration
             'id' => $this->primaryKey(),
             'film_id' => $this->integer()->notNull()->unique(),
             'company_id' => $this->integer()->notNull()->unique(),
-        ]);
+        ], 'ENGINE=InnoDB');
 
         $this->createIndex(
             'idx-film_company-film_id',

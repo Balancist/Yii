@@ -16,7 +16,7 @@ class m231122_180126_create_serie_company_table extends Migration
             'id' => $this->primaryKey(),
             'serie_id' => $this->integer()->notNull()->unique(),
             'company_id' => $this->integer()->notNull()->unique(),
-        ]);
+        ], 'ENGINE=InnoDB');
 
         $this->createIndex(
             'idx-serie_company-serie_id',

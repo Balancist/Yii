@@ -2,10 +2,8 @@
 
 use yii\db\Schema;
 use yii\db\Migration;
+use yii\web\User;
 
-/**
- * Handles the creation of table `{{%film}}`.
- */
 class m231122_134506_create_film_table extends Migration
 {
     /**
@@ -23,8 +21,9 @@ class m231122_134506_create_film_table extends Migration
             'chapter' => $this->integer(),
             'collection_id' => $this->integer(),
             'price' => $this->integer()->defaultValue(0),
-            'kind' => "ENUM('Animation', 'Anime', 'Live Action') NOT NULL"
-        ]);
+            'kind' => "ENUM('Animation', 'Anime', 'Live Action') NOT NULL",
+            'publisher' => $this->integer()->notNull()
+        ], 'ENGINE=InnoDB');
 
         $this->createIndex(
             'idx-film-collection_id',
