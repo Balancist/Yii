@@ -3,6 +3,8 @@
 namespace app\modules\v1\modules\film\models;
 
 use Yii;
+use app\modules\v1\modules\collection\models\Collection;
+use app\modules\v1\modules\auth\models\User;
 
 /**
  * This is the model class for table "film".
@@ -24,7 +26,7 @@ use Yii;
  * @property FilmGenre $filmGenre
  * @property User $publisher0
  */
-class Film extends \yii\db\ActiveRecord
+class Film extends \app\components\ActiveRecord
 {
     /**
      * {@inheritdoc}
