@@ -9,7 +9,9 @@ use yii\web\IdentityInterface;
 class User extends ActiveRecord implements IdentityInterface
 {
     public $group = [
-        'admin' => 1
+        'filmAdmin' => 1,
+        'serieAdmin' => 2,
+        'admin' => 3,
     ];
 
     public static function tableName()

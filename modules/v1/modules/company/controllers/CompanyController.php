@@ -4,7 +4,7 @@ namespace app\modules\v1\modules\company\controllers;
 
 use app\modules\v1\modules\company\models\Company;
 use app\modules\v1\modules\company\models\CompanySearch;
-use yii\web\Controller;
+use app\components\Controller;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
