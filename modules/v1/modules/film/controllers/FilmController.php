@@ -33,6 +33,9 @@ class FilmController extends Controller
 
     public function actionCreate()
     {
+        echo "<pre>";
+        print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS));
+        echo "</pre>";
         $model = new Film();
 
         if ($this->request->isPost) {
@@ -44,9 +47,9 @@ class FilmController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        // return $this->render('create', [
+        //     'model' => $model,
+        // ]);
     }
 
     public function actionUpdate($id)
